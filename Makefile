@@ -23,10 +23,10 @@ install: ssl hosts
 	@mkdir -p src
 	$(DC) build
 	@if [ ! -f src/artisan ]; then \
-		echo "Installing Laravel..."; \
-		$(DC) run --rm app composer create-project laravel/laravel:^13 /var/www --prefer-dist; \
+		echo "Starting interactive Laravel installation – choose your starter kit:"; \
+		$(DC) run --rm -it app bash -c "laravel new /tmp/laravel-app && cp -a /tmp/laravel-app/. /var/www/ && rm -rf /tmp/laravel-app"; \
 	else \
-		echo "src/ is not empty – skipping composer create-project."; \
+		echo "src/ already contains a Laravel installation – skipping."; \
 	fi
 	@chmod +x docker/scripts/configure-env.sh
 	@bash docker/scripts/configure-env.sh

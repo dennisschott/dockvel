@@ -23,8 +23,18 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# Node.js (LTS via NodeSource)
+RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
+    && apt-get install -y nodejs \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 # Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+# Laravel Installer
+RUN composer global require laravel/installer
+ENV PATH="${PATH}:/root/.composer/vendor/bin"
 
 # PHP configuration
 COPY docker/php/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
