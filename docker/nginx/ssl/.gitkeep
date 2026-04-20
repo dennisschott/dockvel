@@ -1,0 +1,1 @@
+# SSL-Zertifikate werden per `make ssl` generiert und nicht committed.

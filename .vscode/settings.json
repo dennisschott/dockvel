@@ -1,0 +1,4 @@
+{
+    "artisan.docker.enabled": true,
+    "artisan.docker.command": "docker compose exec app"
+}
